@@ -1,0 +1,186 @@
+<div class="container register-container">
+    <div class="login-form">
+        <h3>Account Registration Form</h3>
+        <form [formGroup]="registerForm" (ngSubmit)="signUp()">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="firstName">First Name: <strong>*</strong></label>
+                        <input type="text" class="form-control" placeholder="First Name *" id="firstName"
+                            formControlName="firstName" />
+                        <div class="error"
+                            *ngIf="submitted  && register.firstName.errors && register.firstName.errors.required ">
+                            First name is <strong>required</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="lastName">Last Name: <strong>*</strong></label>
+                        <input type="text" class="form-control" placeholder="Last Name *" id="lastName"
+                            formControlName="lastName" />
+                        <div class="error"
+                            *ngIf="submitted  && register.lastName.errors && register.lastName.errors.required ">
+                            Last name is <strong>required</strong>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email: <strong>*</strong></label>
+                        <input type="text" class="form-control" placeholder="Email *" id="email"
+                            formControlName="email" />
+                        <div class="error"
+                            *ngIf="submitted  && register.email.errors && register.email.errors.required">
+                            Email is <strong>required</strong>
+                        </div>
+                        <div class="error" *ngIf="submitted  && register.email.errors && register.email.errors.email">
+                            Email
+                            must be a valid email address</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <label for="dob">
+                            DOB: <strong>*</strong>
+                        </label></div>
+                    <p-calendar formControlName="dob" [monthNavigator]="true" [yearNavigator]="true" placeholder="DOB *"
+                        [showIcon]="true" dateFormat="yy/mm/dd" yearRange="1960:2019" (onSelect)="dobValid($event)"
+                         inputId="dob">
+                    </p-calendar>
+                    <div class="error" *ngIf="submitted  && register.dob.errors && register.dob.errors.required ">
+                        DOB is <strong>required</strong>
+                    </div>
+                    <div class="error" *ngIf="dobErrorFlag"> {{dobErrorFlag}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="mobileNumber">Mobile Number: <strong>*</strong></label>
+                        <input type="text" class="form-control" placeholder="Mobile Number *" id="mobileNumber"
+                            formControlName="mobileNumber" />
+                        <div class="error"
+                            *ngIf="submitted  && register.mobileNumber.errors && register.mobileNumber.errors.required">
+                            Mobile number is <strong>required</strong>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div>Mobile Number: <strong>*</strong></div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="male" value="male"
+                                formControlName="gender">
+                            <label class="custom-control-label" for="male">Male</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="feMale" value="feMale"
+                                formControlName="gender">
+                            <label class="custom-control-label" for="feMale">Female</label>
+                        </div>
+                        <div class="error"
+                            *ngIf="submitted  && register.gender.errors && register.gender.errors.required ">
+                            Gender is <strong>required</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div> <label for="typeOfId">Select Document: <strong>*</strong></label></div>
+                    <div class="form-group">
+                        <p-dropdown [options]="documentTypes" formControlName="typeOfId" optionLabel="name"
+                            placeholder="Select Document*" inputId="typeOfId"></p-dropdown>
+                        <div class="error"
+                            *ngIf="submitted  && register.typeOfId.errors && register.typeOfId.errors.required ">
+                            Document Type is <strong>required</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="idProofNumber">ID Proof: <strong>*</strong></label>
+                        <input type="text" class="form-control" placeholder="ID Proof *" id="idProofNumber"
+                            formControlName="idProofNumber" />
+                        <div class="error"
+                            *ngIf="submitted  && register.idProofNumber.errors && register.idProofNumber.errors.required">
+                            ID Proof Number is <strong>required</strong>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row padding-bottom">
+                <div class="col-md-12">
+                    <label for="address">Address: <strong>*</strong></label>
+                    <textarea class="form-control" placeholder="Address *" id="address" formControlName="address"
+                        rows="2"></textarea>
+                    <div class="error"
+                        *ngIf="submitted  && register.address.errors && register.address.errors.required">
+                        Address is <strong>required</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="password">Password: <strong>*</strong></label>
+                        <input type="password" class="form-control" id="password" placeholder="Your Password *"
+                            formControlName="password" />
+                        <div class="error"
+                            *ngIf="submitted  && register.password.errors  && register.password.errors.required">
+                            Password is <strong>required</strong>
+                        </div>
+                        <div class="error" *ngIf="register.password.errors  && register.password.errors.minlength ">
+                            Password should be 8 digits</div>
+                        <div class="error" *ngIf="register.password.errors  && register.password.errors.maxlength ">
+                            Password should be 8 digits</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password: <strong>*</strong></label>
+                        <input type="password" class="form-control" placeholder="Confirm Password *"
+                            id="confirmPassword" formControlName="confirmPassword" />
+                        <div class="error"
+                            *ngIf="submitted  && register.confirmPassword.errors  && register.confirmPassword.errors.required">
+                            Confirm Password is <strong>required</strong>
+                        </div>
+                        <div class="error"
+                            *ngIf="register.confirmPassword.errors && register.confirmPassword.errors.mustMatch">
+                            Passwords must match</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="salary">Salary <strong>*</strong></label>
+                        <input type="text" class="form-control" id="salary"  placeholder="Your Salary *"
+                            formControlName="salary" />
+                        <div class="error"
+                            *ngIf="submitted  && register.salary.errors && register.salary.errors.required">
+                            Salary is <strong>required</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button class="btn btnSubmit btn-submit">Sign Up</button>
+                        <a routerLink="/login" class="btn btnSubmit btn-submit">Back</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<app-spinner [spinner]="spinner"></app-spinner>
+<app-alert [alertObj]="api.alertConfig" *ngIf="api.alertConfig?.modalShow" (buttonAction)="modalAction($event)">
+</app-alert>

@@ -1,0 +1,38 @@
+<div class="home-container">
+    <h3>Account Summary</h3>
+</div>
+<div class="grid-outer">
+    <div class="grid-head" (click)="showSaving()">
+        <div class="row">
+            <div class="col-md-3">Savings Account </div>
+            <div class="col-md-3"> Account Number:<span class="details">{{accountDetails?.accountNumber}}</span></div>
+            <div class="col-md-3"> Balance:<span class="details">{{accountDetails?.balance}}</span></div>
+            <div class="col-md-3"><span class="head-symbol">{{savingAccount ? '-' : '+' }}</span></div>
+        </div>
+    </div>
+    <div class="grid-container grid-top" *ngIf="savingAccount">
+        <app-grid [gridData]="accountSummaryList" [gridColumnDefinition]="gridColumns" (getAction)="getAction($event)"
+            [sorting]="sorting" [pageLinks]="pageLinks" [pagination]="pagination" *ngIf="accountSummaryList">
+        </app-grid>
+    </div>
+</div>
+
+<div class="grid-outer padding-bottom ">
+    <div class="grid-head" (click)="showMortgage()">
+        <div class="row">
+            <div class="col-md-3">Mortgage Account </div>
+            <div class="col-md-3"> Account Number:<span class="details">{{mortgageList?.account?.accountNumber}}</span></div>
+            <div class="col-md-3"> Balance:<span class="details">{{mortgageList?.account?.balance}}</span></div>
+            <div class="col-md-3"><span class="head-symbol">{{savingAccount ? '-' : '+' }}</span></div>
+        </div>
+    </div>
+    <div class="grid-container grid-top" *ngIf="mortgageAccount">
+        <app-grid [gridData]="mortgageList?.transactions" [gridColumnDefinition]="gridMortgageColumns"
+            (getAction)="getAction($event)" [sorting]="sorting" [pageLinks]="pageLinks" [pagination]="pagination"
+            *ngIf="mortgageList?.transactions">
+        </app-grid>
+    </div>
+</div>
+<app-alert [alertObj]="api.alertConfig" *ngIf="api.alertConfig?.modalShow" (buttonAction)="modalAction($event)">
+</app-alert>
+<app-spinner [spinner]="spinner"></app-spinner>

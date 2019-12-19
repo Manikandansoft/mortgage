@@ -1,0 +1,50 @@
+.claim-container {
+    width: 100%;
+    margin: 7% 0;
+}
+.grid-container {
+    width: 100%;
+    padding-top: 20px;
+}
+.show {
+    display: block;
+    background: #292525a1;
+}
+.show .modal-dialog{
+    position: relative;
+    top: 12%;
+}
+.btn-primary:hover{
+    background: #ff6200;
+}
+.padding-bottom-15 {
+    padding-bottom: 15px ;
+}
+.login-form h3 {
+    padding:0;
+}
+.search-container {
+    width: 228px;
+    display: flex;
+}
+.search-container #search{
+    width: 160px;
+}
+.search-container .form-control{
+    height: 35px;
+    width: 100px;
+}
+.search-container .btn-primary{
+    margin-top: 25px;
+}
+.btn-primary {
+    margin-left: 5px;
+}
+.disabled {
+    background: #eee;
+}
+.success-message{
+    float: right;
+    color: green;
+    font-weight: 500;
+}

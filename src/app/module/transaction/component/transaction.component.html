@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="inner-container">
+        <h3>Transaction Summary</h3>
+        <div class="row padding-bottom-5 reduce-font-size ">
+            <div class="col-md-3"> Account Number: <span class="details">{{accountDetails?.accountNumber}}</span></div>
+            <div class="col-md-3"> Account Type: <span class="details">{{accountDetails?.accountType}}</span></div>
+            <div class="col-md-3"> Transferable Amount: <span class="details">{{accountDetails?.balance - 1000}}</span>
+            </div>
+            <div class="col-md-3 text-align-right"> Available Balance: <span
+                    class="details">{{accountDetails?.balance}}</span></div>
+        </div>
+        
+        <form [formGroup]="transaction" (ngSubmit)="getSummary()">
+            <div class="row">
+                <div class="col-3">
+                    <div> <label for="fromMonth">Select Month: <strong>*</strong></label> </div>
+                    <p-dropdown [options]="month" formControlName="fromMonth" optionLabel="name"
+                        placeholder="Select Month *" inputId="fromMonth" ></p-dropdown>
+                    <div class="error"
+                        *ngIf="submitted  && transactionSummary.fromMonth.errors && transactionSummary.fromMonth.errors.required ">
+                        Mionth is <strong>required</strong>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div> <label for="fromYear">Select Year: <strong>*</strong></label></div>
+                    <p-dropdown [options]="year" formControlName="fromYear" optionLabel="name"
+                        placeholder="Select year *" inputId="fromYear" ></p-dropdown>
+                    <div class="error"
+                        *ngIf="submitted  && transactionSummary.fromYear.errors && transactionSummary.fromYear.errors.required ">
+                        Year is <strong>required</strong>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div> <label for="type">Select Account Type: <strong>*</strong></label></div>
+                    <p-dropdown [options]="typeList" formControlName="type" optionLabel="name"
+                        placeholder="Select Type *" inputId="type"></p-dropdown>
+                    <div class="error"
+                        *ngIf="submitted  && transactionSummary.type.errors && transactionSummary.type.errors.required ">
+                        Account type is <strong>required</strong>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <button class="btnSubmit" aria-label="Search">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="grid-container"> 
+    <app-grid [gridData]="transactionSummaryList" [gridColumnDefinition]="gridColumns" (getAction)="getAction($event)"
+        [sorting]="sorting" [pageLinks]="pageLinks" [pagination]="pagination" *ngIf="transactionSummaryList">
+    </app-grid>
+</div>
+
+<app-alert [alertObj]="api.alertConfig" *ngIf="api.alertConfig?.modalShow" (buttonAction)="modalAction($event)">
+</app-alert>
+<app-spinner [spinner]="spinner"></app-spinner>

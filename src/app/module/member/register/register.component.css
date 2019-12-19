@@ -1,0 +1,29 @@
+
+.form-control:invalid {
+    border-color: #dc3545;
+}
+
+.register-container{
+    margin-top: 8%;
+    margin-bottom: 8%;
+}
+
+.form-check-label{
+    color: #ff6200;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 80%;
+}
+.form-group .btn{
+    margin-left: 5px;
+}
+
+.padding-bottom {
+    padding-bottom: 15px;
+}
+.btn-submit {
+    border-radius: 1rem;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}

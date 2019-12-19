@@ -1,0 +1,158 @@
+<div class="container login-container claim-container">
+    <div class="row">
+        <div class="col-md-12 login-form">
+            <h3 class="padding-bottom-15">Customer Details</h3>
+            <span *ngIf="createMortgageSuccess?.message" class="success-message">{{createMortgageSuccess?.message}}! Ac/No: {{createMortgageSuccess?.accountNumber}}</span>
+            <div class="search-container">
+                <div class="form-group">
+                    <label for="search"></label>
+                    <input type="text" class="form-control" name="search" id="search" [(ngModel)]="searchKey">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary border-none ing-theme-color" (click)="searchCustomer()">Search</button>
+                </div>
+
+            </div>
+            <div class="grid-container">
+                <app-grid [gridData]="accountList" [gridColumnDefinition]="gridColumns" (getAction)="getAction($event)"
+                    [sorting]="sorting" [pageLinks]="pageLinks" [pagination]="pagination">
+                </app-grid>
+            </div>
+        </div>
+
+    </div>
+</div>
+<app-spinner [spinner]="spinner"></app-spinner>
+<app-alert [alertObj]="api.alertConfig" *ngIf="api.alertConfig?.modalShow" (buttonAction)="modalAction($event)">
+</app-alert>
+<div class="modal" [ngClass]="{'show fade': createMortgageFlag}">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title heading">Create Mortgage</h4>
+                <span> Salary: {{selectedRow?.salary}}</span>
+            </div>
+            <form [formGroup]="mortgageForm" (ngSubmit)="createMortgage()">
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="mortgegeType">Mortgage Type <strong>*</strong></label>
+                                <select class="form-control" id="mortgegeType" formControlName="mortgegeType">
+                                    <option value="">-- Select Type --</option>
+                                    <option value="{{type.value}}" *ngFor="let type of mortgegeTypeList">{{type.name}}
+                                    </option>
+                                </select>
+                                <div class="error"
+                                    *ngIf="submitted  && mortgage.mortgegeType.errors && mortgage.mortgegeType.errors.required ">
+                                    Mortgage Type is <strong>required</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="interestRate">Interest Rate:</label> 
+                                <div  class="form-control disabled" >{{interestRate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="amount">Loan Amount: <strong>*</strong></label>
+                                <input type="text" class="form-control" placeholder="Loan Amount *" id="amount"
+                                    formControlName="amount" (blur)="calculateEMI()" />
+                                <div class="error"
+                                    *ngIf="submitted  && mortgage.amount.errors && mortgage.amount.errors.required">
+                                    Mobile number is <strong>required</strong>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="tenure">Tenure: <strong>*</strong></label>
+                                <select class="form-control" id="tenure" formControlName="tenure"
+                                    (change)="calculateEMI()">
+                                    <option value="">-- Select Type --</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <div class="error"
+                                    *ngIf="submitted  && mortgage.tenure.errors && mortgage.tenure.errors.required">
+                                    Tenure is <strong>required</strong>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="EMI " id="emi" value="{{emi}}"
+                                    disabled />
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="warningMessage">
+                            <span class="error">{{warningMessage}}</span>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                   
+                    <div class="form-group">
+                        <button type="reset" class="btn btn-primary border-none ing-theme-color" aria-label="Cancel"
+                            (click)="reset()">Cancel</button>
+                        <button class="btn btn-primary border-none ing-theme-color" aria-label="Create">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal" [ngClass]="{'show fade': viewMortgageFlag}">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title heading">Mortgage Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row padding-bottom-15">
+                    <div class="col-md-6">Name: <strong>{{selectedRow?.firstName}}</strong></div>
+                    <div class="col-md-6">Age: <strong>{{selectedRow?.age}}</strong></div>
+
+                </div>
+                <div class="row padding-bottom-15">
+                    <div class="col-md-6">Account Number: <strong>{{selectedRow?.mortgage?.accountNumber}}</strong> 
+                    </div>
+                    <div class="col-md-6">Type: <strong>{{selectedRow?.mortgage?.accountType}}</strong></div>
+                </div>
+                <div class="row padding-bottom-15">
+                    <div class="col-md-6">Total Loan Amount: <strong>Rs. {{selectedRow?.mortgage?.mortgage.amount}}</strong></div>
+                    <div class="col-md-6">Loan Amount: <strong>Rs. {{selectedRow?.mortgage?.balance}}</strong></div>
+                </div>
+                <div class="row padding-bottom-15">
+                    <div class="col-md-6">Interest: <strong>{{selectedRow?.mortgage?.mortgage?.interest}}%</strong></div>
+                    
+                    <div class="col-md-6">Tenure(year): <strong>{{selectedRow?.mortgage?.mortgage?.tenure}}</strong></div>
+                </div>
+                <div class="row padding-bottom-15">
+                    <div class="col-md-6">EMI: <strong>Rs. {{selectedRow?.mortgage?.mortgage?.emi}}</strong></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="closeView()"
+                    class="btn btn-primary border-none ing-theme-color">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>

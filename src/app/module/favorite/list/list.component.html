@@ -1,0 +1,82 @@
+<div class="home-container">
+    <h3>Favorite Payee </h3>
+    <button class="btn btn-primary border-none ing-theme-color add-payee" id="" (click)="addPayee()">Add Payee</button>
+</div>
+<div class="grid-container">
+    <app-grid [gridData]="favoriteList" [gridColumnDefinition]="gridColumns" (getAction)="getAction($event)"
+        [sorting]="sorting" [pageLinks]="pageLinks" [pagination]="pagination" >
+    </app-grid>
+</div>
+<div class="modal" [ngClass]="{'show fade': createFavoriteFlag}">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title heading">{{addFavorite ? 'Add' : 'Edit'}} Payee</h4>
+            </div>
+            <form [formGroup]="favaritePayee" (ngSubmit)="addEditdPayee()">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="favoriteName">Favorite Name <strong>*</strong></label>
+                                <input type="text" class="form-control" placeholder="Favorite Name *" id="favoriteName"
+                                    formControlName="favoriteName"  />
+                                <div class="error"
+                                    *ngIf="submitted  && mortgage.favoriteName.errors && mortgage.favoriteName.errors.required ">
+                                    Favorite Name Type is <strong>required</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="accountNumber">Account Number <strong>*</strong></label>
+                                <input type="text" class="form-control" placeholder="Account Number *" id="accountNumber"
+                                    formControlName="accountNumber" (blur)="checkValidAccount()" />
+                                <div class="error"
+                                    *ngIf="submitted  && mortgage.accountNumber.errors && mortgage.accountNumber.errors.required ">
+                                    Mortgage Type is <strong>required</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ifscCode">IFSC Code <strong>*</strong></label>
+                                <input type="text" class="form-control" placeholder="IFSC Code  *" id="ifscCode"
+                                    formControlName="ifscCode" (blur)="checkValidAccount()" />
+                                <div class="error"
+                                    *ngIf="submitted  && mortgage.ifscCode.errors && mortgage.ifscCode.errors.required">
+                                    IFSC Code  is <strong>required</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="showBankDetail">
+                        <div class="col-md-6" >
+                            <span>Bank Name : </span>
+                            <span>{{bankDetail?.bankName}}</span> 
+                        </div>
+                        <div class="col-md-6" >
+                            <span>Branch : </span>
+                            <span>{{bankDetail?.branchName}}</span> 
+                        </div>
+                    </div>  
+                    <div class="row"  *ngIf="invalidBank">
+                        <div class="col-md-6" >No bank details are found this IFSC code</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="reset" class="btn btn-primary border-none ing-theme-color btn-margin" aria-label="Cancel"
+                            (click)="reset()">Cancel</button>
+                        <button class="btn btn-primary border-none ing-theme-color" aria-label="Create">{{addFavorite ? 'Add' : 'Update'}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<app-alert [alertObj]="api.alertConfig" *ngIf="api.alertConfig?.modalShow" (buttonAction)="modalAction($event)"></app-alert>
+<app-spinner [spinner]="spinner"></app-spinner>

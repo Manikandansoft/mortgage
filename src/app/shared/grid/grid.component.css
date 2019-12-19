@@ -1,0 +1,38 @@
+.book-btn {
+    background: #ffa500;
+    color: #fff;
+}
+.error-container {
+    text-align: center;
+    font-weight: 600;
+    padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    width: 45%;
+    margin: 0 auto;
+}
+.create {
+    padding: 4px;
+    background: green;
+    color: #fff;
+    cursor: pointer;
+    margin: 0 26%;
+}
+.view {
+    padding: 4px;
+    background: #800006cf;
+    color: #fff;
+    cursor: pointer;
+    margin: 0 26%;
+}
+.delete, .edit {
+    padding: 4px;
+    color: #fff;
+    cursor: pointer;
+    margin: 2px;  
+}
+.delete{
+    background: #800006cf;
+}
+.edit{
+    background: green;
+}

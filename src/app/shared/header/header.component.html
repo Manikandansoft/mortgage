@@ -1,0 +1,25 @@
+
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark header-bg ing-theme-color mb-4 fixed-top" >
+
+    <a class="navbar-brand" routerLink="/" title="Logo" >Retail Bank</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" (click)="toggle()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse" [ngClass]="{'show toggle-height': toggleFlag}">
+      <div class="navbar-nav" *ngIf="userDetails?.userId && userDetails?.role !== 'ADMIN'">
+          <a routerLink="/account-summary" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Account Summary</a>
+          <a routerLink="/fund-transfer" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Transfer Fund</a>
+          <a routerLink="/transaction" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Transaction history</a>
+          <a routerLink="/favorite" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
+            Favorite Payees</a>
+        </div>
+      <div class="user-details" *ngIf="userDetails?.userId" [ngClass]="{'show toggle-class': toggleFlag}">
+        Welcome, <strong>{{userDetails?.firstName}}<span class="role">({{userDetails?.role}})</span></strong>
+        <button class="btn btn-primary logout" type="submit" (click)="logout()">Logout</button>
+      </div>
+    </div>
+</nav>
+</header>

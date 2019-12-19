@@ -1,0 +1,23 @@
+.home-container {
+    margin-top: 10% ;
+    display: flow-root;
+ }
+ .home-container h3 {
+    padding: 1% 0;
+    color: #ff6200;
+ }
+ .show {
+    display: block;
+    background: #292525a1;
+}
+.show .modal-dialog{
+    position: relative;
+    top: 12%;
+}
+.add-payee {
+    float: right;
+    border-radius: 0;
+}
+.btn-margin{
+    margin-right: 10px;
+}

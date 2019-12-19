@@ -1,0 +1,47 @@
+.home-container {
+   margin-top: 10% ;
+}
+.home-container h3 {
+   padding: 1% 0;
+   color: #ff6200;
+}
+.details{
+   padding: 6px 14px;
+   color: #fff;
+   background-color: #ff6200;
+   font-weight: 600
+}
+.padding-bottom {
+   padding-bottom: 10px;
+}
+.padding-top {
+   padding: 10px;
+
+}
+.grid-container{
+   padding-bottom: 2%;
+   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+h3 {
+   font-weight: 600;
+   color: #ff6200;
+}
+.grid-head {
+   padding: 11px 10px;
+   background-color: #ff6200;
+   color: #fff;
+   margin-bottom: 10px;
+   cursor: pointer;
+   margin-top: 10px;
+}
+.head-symbol {
+   float: right;
+   font-size: 15px;
+    font-weight: 700;
+}
+.grid-top {
+   margin-top: -10px;
+}
+.accocunt-container {
+   border: 1px solid red;
+}

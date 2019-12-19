@@ -1,0 +1,95 @@
+/* You can add global styles to this file, and also import other style files */
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 55px;
+}
+.error{
+    font-size: 80%;
+    font-style: italic;
+    color: #f44336;
+    padding: 2px;
+}
+.ui-listbox {
+    height: 495px;
+    width: 220px !important;
+}
+.heading {
+    color: #ff6200;
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 10px;
+}
+.ing-theme-color {
+    background-color: #ff6200;
+    color: #fff;
+}
+.ui-card {
+    color: #ff6200;
+}
+.border-none {
+    border: none;
+}
+/* registration & login */
+.login-form, .inner-container {
+    padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    margin: 0 auto;
+    background: transparent;
+}
+.login-form h3, .inner-container h3 {
+    color: #ff6200;
+    text-align: left;
+    padding: 0 10%;
+}
+.login-container form {
+    padding: 5% 10%;
+}
+.register-container form {
+    padding: 2% 10%;
+}
+.btnSubmit {
+    border-radius: 1rem;
+    padding: 2% 3.5%;
+    border: none;
+    cursor: pointer;
+}
+
+.login-form .btnSubmit, .inner-container .btnSubmit{
+    font-weight: 600;
+    color: #fff;
+    background-color: #ff6200;
+    float: right;
+}
+.login-form .ForgetPwd {
+    color: #ff6200;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 80%;
+}
+.heading {
+    color: #ff6200;
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 10px;
+  }
+.text-align-right{
+    text-align: right;
+ }
+ .ui-table .ui-paginator-bottom{
+    text-align: right;
+ }
+ .text-align-center {
+     text-align: center;
+ }
+ .details{
+    padding: 6px 14px;
+    color: #fff;
+    background-color: #ff6200;
+    font-weight: 600;
+}

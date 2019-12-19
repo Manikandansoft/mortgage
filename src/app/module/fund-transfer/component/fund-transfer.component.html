@@ -1,0 +1,54 @@
+<div class="container ">
+    <div class="row">
+        <div class="col-md-3"> Account Number: <span class="details">{{accountDetails?.accountNumber}}</span></div>
+        <div class="col-md-3"> Account Type: <span class="details">{{accountDetails?.accountType}}</span></div>
+        <div class="col-md-3"> Transferable Amount: <span class="details">{{accountDetails?.balance - 1000}}</span>
+        </div>
+        <div class="col-md-3 text-align-right"> Available Balance: <span
+                class="details">{{accountDetails?.balance}}</span></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 inner-container">
+            <h3>Fund Transfer</h3>
+            <form [formGroup]="fundTransferForm" (ngSubmit)="transferFund()">
+
+                <div class="form-group">
+                    <label for="toAccount">Account Number:</label>
+                    <select class="form-control selectpicker" formControlName="toAccount" id="toAccount">
+                        <option value="">--Slelect Favorite</option>
+                        <option *ngFor="let favorite of favariteDetail" value="{{favorite.payeeId}}">
+                            {{favorite.accountNumber}} - ({{favorite.favoriteName}} - {{favorite.branchName}}) </option>
+                      </select>
+
+                    <div class="error"
+                        *ngIf="submitted  && transfer.toAccount.errors && transfer.toAccount.errors.required ">
+                        Account number <strong>required</strong>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="text" class="form-control" placeholder="Amount *" id="amount"
+                        formControlName="amount" />
+                    <div class="error" *ngIf="submitted  && transfer.amount.errors && transfer.amount.errors.required ">
+                        Amount is <strong>required</strong>
+                    </div>
+                    <div class="error" *ngIf="transfer.amount.errors && transfer.amount.errors.min ">
+                        Amount should not be <strong>0 </strong>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="remarks">Remarks :</label>
+                    <input type="text" class="form-control" placeholder="Remarks " id="remarks"
+                        formControlName="remarks" />
+                </div>
+                <div class="form-group">
+
+                    <button class="btnSubmit" aria-label="Transfer fund">Transfer fund</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<app-spinner [spinner]="spinner"></app-spinner>
+<app-alert [alertObj]="api.alertConfig" *ngIf="api.alertConfig?.modalShow" (buttonAction)="modalAction($event)">
+</app-alert>
